@@ -1,13 +1,18 @@
 let messages = []; // Array to store messages
 
 function sendMessage() {
+    const nameInput = document.getElementById("nameInput");
     const messageInput = document.getElementById("messageInput");
-    const message = messageInput.value;
+    const name = nameInput.value.trim();
+    const message = messageInput.value.trim();
 
-    if (message) {
-        messages.push(message);  // Store the new message
+    if (name && message) {
+        const fullMessage = `${name}: ${message}`;
+        messages.push(fullMessage);  // Store the new message
         messageInput.value = "";  // Clear input box
         displayMessages();        // Display messages
+    } else {
+        alert("Please enter both your name and message.");
     }
 }
 
@@ -21,4 +26,7 @@ function displayMessages() {
         msgElement.textContent = msg;
         chatBox.appendChild(msgElement);
     });
+
+    // Scroll to the latest message
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
